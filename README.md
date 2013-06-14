@@ -2,6 +2,8 @@
 
   Node.js PID controller
 
+![pid](http://upload.wikimedia.org/wikipedia/commons/9/91/PID_en_updated_feedback.svg)
+
 ## Installation
 
       $ npm install node-pid-controller
@@ -23,6 +25,22 @@ ctr.setTarget(120); // 120km/h
 ### Get the correction
 ```js
 var correction = ctr.update(110); // 110km/h is the current speed
+```
+
+### Normally, you use the correction to a measure, in a closed loop
+```js
+var goalReached = false
+while (!goalReached) {
+  var output = measureFromSomeSensor();
+  var input  = ctr.update(output);
+  applyInputToActuator(input);
+  goalReached = (input === 0) ? true : false; // in the case of continuous control, you let this variable 'false'
+}
+```
+
+## Test
+```js
+mocha test;
 ```
 
 ## Author
