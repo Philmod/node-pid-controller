@@ -1,6 +1,6 @@
 # node-pid-controller
 
-  Node.js PID controller
+  Simple Node.js PID controller
 
 ![pid](http://upload.wikimedia.org/wikipedia/commons/9/91/PID_en_updated_feedback.svg)
 
@@ -27,7 +27,8 @@ ctr.setTarget(120); // 120km/h
 var correction = ctr.update(110); // 110km/h is the current speed
 ```
 
-### Normally, you use the correction to a measure, in a closed loop
+### Real example
+Normally, you use the correction to a measure, in a closed loop
 ```js
 var goalReached = false
 while (!goalReached) {
@@ -40,7 +41,7 @@ while (!goalReached) {
 
 ## Test
 ```js
-mocha test;
+mocha test
 ```
 
 ## Author
