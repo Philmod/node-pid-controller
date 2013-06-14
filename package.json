@@ -1,6 +1,6 @@
 {
   "name": "node-pid-controller",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node.js PID controller",
   "keywords": [
     "pid",
@@ -14,8 +14,7 @@
   "engines": {
     "node": ">= v0.8.0"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "should": "",
     "mocha": ""
