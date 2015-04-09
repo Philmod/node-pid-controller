@@ -37,5 +37,12 @@ describe('pid-controller', function(){
     var correction = ctr.update(vt);
     correction.should.equal(8);
   });
+  
+  it('should reset the controller', function(){
+    ctr.reset();
+    ctr.sumError.should.equal(0);
+    ctr.lastError.should.equal(0);
+    ctr.lastTime.should.equal(0);
+  });
 
 });
