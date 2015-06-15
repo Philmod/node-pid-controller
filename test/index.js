@@ -45,4 +45,17 @@ describe('pid-controller', function(){
     ctr.lastTime.should.equal(0);
   });
 
+  it('should return the correction for a given update interval', function(){
+    ctr.dt = 2; // 2 seconds between updates
+    var correction = ctr.update(115);
+    correction.should.equal(4);
+  });
+
+  it('should return a null correction', function(){
+    var ctr = new Controller(0, 0, 0);
+    ctr.setTarget(120);
+    var correction = ctr.update(110);
+    correction.should.equal(0);
+  });
+
 });
