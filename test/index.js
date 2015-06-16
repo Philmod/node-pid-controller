@@ -12,13 +12,13 @@ var Controller = require('../')
  */
 describe('pid-controller', function(){
 
-  var k_p = 0.5
-    , k_i = 0.1
-    , k_d = 0.2
-    ;
+  var k_p = 0.5,
+      k_i = 0.1,
+      k_d = 0.2,
+      dt  = 1;
 
   // Create the controller
-  var ctr = new Controller(k_p, k_i, k_d);
+  var ctr = new Controller(k_p, k_i, k_d, dt);
 
   it('should have set the coefficient', function() {
     ctr.k_p.should.equal(k_p);
@@ -45,7 +45,7 @@ describe('pid-controller', function(){
     ctr.lastTime.should.equal(0);
   });
 
-  it('should return the correction for a given update interval', function(){
+  it('should return the correction for the given update interval', function(){
     ctr.dt = 2; // 2 seconds between updates
     var correction = ctr.update(115);
     correction.should.equal(4);
