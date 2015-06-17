@@ -12,7 +12,7 @@
 Let's take the example of a car cruise control.  We want the car driving at 120km/h.
 
 ### Create a Controller instance
-`k_p`, `k_i` and `k_d` are the proportional, integral and derivative terms, `dt` is the interval of time between two measures.
+`k_p`, `k_i` and `k_d` are the proportional, integral and derivative terms. `dt` is the interval of time between two measures. If not set, it will be automatically calculated.
 ```js
 var Controller = require('node-pid-controller');
 var ctr = new Controller(0.25, 0.01, 0.01, 1); // k_p, k_i, k_d, dt
