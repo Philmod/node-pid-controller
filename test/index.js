@@ -50,17 +50,18 @@ describe('pid-controller', function(){
     var correction = ctr.update(115);
     correction.should.equal(4);
     ctr.dt = dt; // Reset original dt
+    ctr.reset();
   });
 
   it('should return the correction for the given integral length', function(){
-    ctr.reset();
     ctr.sumLength = 5; // Only keep the five last errors
-    for (var i = 0; i < 10; i++) {
-      ctr.update(100 + i);
+    var correction;
+    for (var i = 0; i <= 10; i++) {
+      correction = ctr.update(100 + i);
     }
-    var correction = ctr.update(110);
     correction.should.equal(12.3);
     ctr.sumLength = 0; // Reset to original value
+    ctr.reset();
   });
 
   it('should return a null correction', function(){
