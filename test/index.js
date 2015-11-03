@@ -12,18 +12,30 @@ var Controller = require('../')
  */
 describe('pid-controller', function(){
 
-  var k_p = 0.5,
-      k_i = 0.1,
-      k_d = 0.2,
-      dt  = 1;
+  var options = {
+    k_p: 0.5,
+    k_i: 0.1,
+    k_d: 0.2,
+    dt: 1
+  };
 
   // Create the controller
-  var ctr = new Controller(k_p, k_i, k_d, dt);
+  var ctr = new Controller(options.k_p, options.k_i, options.k_d, options.dt);
 
   it('should have set the coefficient', function() {
-    ctr.k_p.should.equal(k_p);
-    ctr.k_i.should.equal(k_i);
-    ctr.k_d.should.equal(k_d);
+    ctr.k_p.should.equal(options.k_p);
+    ctr.k_i.should.equal(options.k_i);
+    ctr.k_d.should.equal(options.k_d);
+    ctr.dt.should.equal(options.dt);
+  });
+
+  it('should have set the coefficient from an options object', function(){
+    var ctr = new Controller(options);
+
+    ctr.k_p.should.equal(options.k_p);
+    ctr.k_i.should.equal(options.k_i);
+    ctr.k_d.should.equal(options.k_d);
+    ctr.dt.should.equal(options.dt);
   });
 
   it('should set the target', function(){
@@ -37,7 +49,7 @@ describe('pid-controller', function(){
     var correction = ctr.update(vt);
     correction.should.equal(8);
   });
-  
+
   it('should reset the controller', function(){
     ctr.reset();
     ctr.sumError.should.equal(0);
@@ -49,6 +61,16 @@ describe('pid-controller', function(){
     ctr.dt = 2; // 2 seconds between updates
     var correction = ctr.update(115);
     correction.should.equal(4);
+    ctr.dt = options.dt; // Reset dt
+  });
+
+  it('should return the correction with sumError <= i_max', function() {
+    var ctr = new Controller(options);
+    ctr.i_max = 5; // sumError will be 10
+    ctr.setTarget(120);
+    var correction = ctr.update(110);
+    correction.should.equal(7.5);
+    ctr.sumError.should.be.belowOrEqual(ctr.i_max);
   });
 
   it('should return a null correction', function(){
