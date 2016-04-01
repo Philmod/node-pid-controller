@@ -1,8 +1,10 @@
+"use strict";
+
 /**
  * Module dependencies.
  */
 
-var Controller = require('../')
+let Controller = require('../')
   , should = require('should')
   , assert = require('assert')
   ;
@@ -10,9 +12,9 @@ var Controller = require('../')
 /**
  * Tests
  */
-describe('pid-controller', function(){
+describe('pid-controller', () => {
 
-  var options = {
+  let options = {
     k_p: 0.5,
     k_i: 0.1,
     k_d: 0.2,
@@ -20,17 +22,17 @@ describe('pid-controller', function(){
   };
 
   // Create the controller
-  var ctr = new Controller(options.k_p, options.k_i, options.k_d, options.dt);
+  let ctr = new Controller(options.k_p, options.k_i, options.k_d, options.dt);
 
-  it('should have set the coefficient', function() {
+  it('should have set the coefficient', () => {
     ctr.k_p.should.equal(options.k_p);
     ctr.k_i.should.equal(options.k_i);
     ctr.k_d.should.equal(options.k_d);
     ctr.dt.should.equal(options.dt);
   });
 
-  it('should have set the coefficient from an options object', function(){
-    var ctr = new Controller(options);
+  it('should have set the coefficient from an options object', () => {
+    let ctr = new Controller(options);
 
     ctr.k_p.should.equal(options.k_p);
     ctr.k_i.should.equal(options.k_i);
@@ -38,45 +40,45 @@ describe('pid-controller', function(){
     ctr.dt.should.equal(options.dt);
   });
 
-  it('should set the target', function(){
-    var v = 120; // 120km/h
+  it('should set the target', () => {
+    let v = 120; // 120km/h
     ctr.setTarget(v);
     ctr.target.should.equal(v);
   });
 
-  it('should return the correction', function(){
-    var vt = 110; // current speed
-    var correction = ctr.update(vt);
+  it('should return the correction', () => {
+    let vt = 110; // current speed
+    let correction = ctr.update(vt);
     correction.should.equal(8);
   });
 
-  it('should reset the controller', function(){
+  it('should reset the controller', () => {
     ctr.reset();
     ctr.sumError.should.equal(0);
     ctr.lastError.should.equal(0);
     ctr.lastTime.should.equal(0);
   });
 
-  it('should return the correction for the given update interval', function(){
+  it('should return the correction for the given update interval', () => {
     ctr.dt = 2; // 2 seconds between updates
-    var correction = ctr.update(115);
+    let correction = ctr.update(115);
     correction.should.equal(4);
     ctr.dt = options.dt; // Reset dt
   });
 
-  it('should return the correction with sumError <= i_max', function() {
-    var ctr = new Controller(options);
+  it('should return the correction with sumError <= i_max', () => {
+    let ctr = new Controller(options);
     ctr.i_max = 5; // sumError will be 10
     ctr.setTarget(120);
-    var correction = ctr.update(110);
+    let correction = ctr.update(110);
     correction.should.equal(7.5);
     ctr.sumError.should.be.belowOrEqual(ctr.i_max);
   });
 
-  it('should return a null correction', function(){
-    var ctr = new Controller(0, 0, 0);
+  it('should return a null correction', () => {
+    let ctr = new Controller(0, 0, 0);
     ctr.setTarget(120);
-    var correction = ctr.update(110);
+    let correction = ctr.update(110);
     correction.should.equal(0);
   });
 

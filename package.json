@@ -12,7 +12,7 @@
   "author": "Philmod <philippe.modard@gmail.com>",
   "homepage": "http://github.com/philmod/node-pid-controller",
   "engines": {
-    "node": ">= v0.8.0"
+    "node": ">= v4.0.0"
   },
   "dependencies": {},
   "devDependencies": {
