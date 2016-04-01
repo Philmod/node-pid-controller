@@ -1,6 +1,6 @@
 {
   "name": "node-pid-controller",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Node.js PID controller",
   "keywords": [
     "pid",
