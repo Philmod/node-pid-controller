@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-let Controller = require('../')
+let Controller = require('../src')
   , should = require('should')
   , assert = require('assert')
   ;
