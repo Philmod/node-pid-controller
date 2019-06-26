@@ -16,8 +16,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "should": "",
-    "mocha": ""
+    "mocha": "^6.1.4",
+    "should": "^13.2.3"
   },
   "scripts": {
     "test": "make test"
