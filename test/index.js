@@ -82,4 +82,12 @@ describe('pid-controller', () => {
     correction.should.equal(0);
   });
 
+  it('should throw error when updating a NaN value', () => {
+    let ctr = new Controller(0,0,0);
+    ctr.setTarget(20);
+    should.throws(() => {
+      ctr.update(NaN);
+    }, Error, "Invalid argument")
+  });
+
 });
