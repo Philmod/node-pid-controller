@@ -16,7 +16,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "mocha": "^6.1.4",
+    "mocha": "^6.2.3",
     "should": "^13.2.3"
   },
   "scripts": {
