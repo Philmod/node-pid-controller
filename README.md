@@ -56,7 +56,7 @@ while (!goalReached) {
   let output = measureFromSomeSensor();
   let input  = ctr.update(output);
   applyInputToActuator(input);
-  goalReached = (input === 0) ? true : false; // in the case of continuous control, you let this variable 'false'
+  goalReached = (input === 0); // in the case of continuous control, you let this variable 'false'
 }
 ```
 
