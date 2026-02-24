@@ -29,5 +29,5 @@
     "type": "git",
     "url": "git://github.com/Philmod/node-pid-controller.git"
   },
-  "license": "BSD"
+  "license": "MIT"
 }
