@@ -31,6 +31,9 @@ declare class Controller {
 
     public setTarget(target: number): void;
 
+    public setTuning(options: Controller.Options);
+    public setTuning(k_p?: number, k_i?: number, k_d?: number, dt?: number);
+
     public update(currentValue: number): number;
 
     public reset(): number;

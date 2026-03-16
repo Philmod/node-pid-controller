@@ -34,6 +34,19 @@ You can also pass options as arguments:
 let ctr = new Controller(0.25, 0.01, 0.01, 1); // k_p, k_i, k_d, dt
 ```
 
+### Re-set the tuning
+
+```js
+ctr.setTuning(0.25, 0.01, 0.01, 1); // k_p, k_i, k_d, dt
+
+ctr.setTuning({ // as object
+  k_p: 0.25,
+  k_i: 0.01,
+  k_d: 0.01,
+  dt: 1
+}); 
+```
+
 ### Set the target
 
 ```js

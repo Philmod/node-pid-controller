@@ -40,6 +40,24 @@ describe('pid-controller', () => {
     ctr.dt.should.equal(options.dt);
   });
 
+  it('should have set the coefficient from an new options object', () => {
+    let newOptions = {
+      k_p: 0.7,
+      k_i: 0.2,
+      k_d: 0.3,
+      dt: 10
+    }
+
+    ctr.setTuning(newOptions.k_p, newOptions.k_i, newOptions.k_d, newOptions.dt);
+
+    ctr.k_p.should.equal(newOptions.k_p);
+    ctr.k_i.should.equal(newOptions.k_i);
+    ctr.k_d.should.equal(newOptions.k_d);
+    ctr.dt.should.equal(newOptions.dt);
+
+    ctr.setTuning(options); // Reset tunings
+  });
+
   it('should set the target', () => {
     let v = 120; // 120km/h
     ctr.setTarget(v);
@@ -60,15 +78,22 @@ describe('pid-controller', () => {
   });
 
   it('should return the correction for the given update interval', () => {
-    ctr.dt = 2; // 2 seconds between updates
+    ctr.setTuning({
+      dt: 2 // 2 seconds between updates
+    })
     let correction = ctr.update(115);
     correction.should.equal(4);
-    ctr.dt = options.dt; // Reset dt
+
+    ctr.setTuning({
+      dt: options.dt // Reset dt
+    })
   });
 
   it('should return the correction with sumError <= i_max', () => {
     let ctr = new Controller(options);
-    ctr.i_max = 5; // sumError will be 10
+    ctr.setTuning({
+      i_max: 5 // sumError will be 10
+    });
     ctr.setTarget(120);
     let correction = ctr.update(110);
     correction.should.equal(7.5);
@@ -83,7 +108,7 @@ describe('pid-controller', () => {
   });
 
   it('should throw error when updating a NaN value', () => {
-    let ctr = new Controller(0,0,0);
+    let ctr = new Controller(0, 0, 0);
     ctr.setTarget(20);
     should.throws(() => {
       ctr.update(NaN);
